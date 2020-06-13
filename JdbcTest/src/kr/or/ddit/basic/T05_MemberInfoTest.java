@@ -246,7 +246,7 @@ public class T05_MemberInfoTest {
       System.out.print("회원 전화번호 >> ");
       String memTel = scan.next();
       
-      scan.nextLine(); // 버퍼 비우
+      scan.nextLine(); // 버퍼 비우기
       
       System.out.print("회원 주소 >> ");
       String memAddr = scan.nextLine();

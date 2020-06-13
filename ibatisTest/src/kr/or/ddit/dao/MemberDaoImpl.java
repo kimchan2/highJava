@@ -19,6 +19,17 @@ public class MemberDaoImpl implements IMemberDao{
 	private PreparedStatement pstmt;
 	private ResultSet rs;
 	
+	private static IMemberDao dao;
+	
+	private MemberDaoImpl() {}
+	
+	public static IMemberDao getInstance() {
+		if(dao == null) {
+			dao = new MemberDaoImpl();
+		}
+		return dao;
+	}
+	
 	private void disConnet() {
 	      //  사용했던 자원 반납
 	      if(rs!=null)try{ rs.close(); }catch(SQLException ee){}
