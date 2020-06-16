@@ -55,8 +55,8 @@ public class MemberServiceImpl implements IMemberService{
 	}
 
 	@Override
-	public List<MemberVO> searchMember(MemberVO mv) {
-		return memDao.searchMember(mv);
+	public List<MemberVO> getSearchMember(MemberVO mv) {
+		return memDao.getSearchMember(mv);
 	}
 
 }

@@ -50,5 +50,7 @@ public interface IMemberDao {
 	 * @param mv 검색할 자료가 들어있는 MemberVO객체
 	 * @return 검색결과를 담은 List
 	 */
-	public List<MemberVO> searchMember(MemberVO mv);
+	public List<MemberVO> getSearchMember(MemberVO mv);
+	
+	
 }

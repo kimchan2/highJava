@@ -120,7 +120,7 @@ public class MemberInfoTest {
 		mv.setMem_tel(memTel);
 		mv.setMem_addr(memAddr);
 		
-		List<MemberVO> memList = service.searchMember(mv);
+		List<MemberVO> memList = service.getSearchMember(mv);
 		
 		System.out.println();
 		System.out.println("--------------------------------------------------");

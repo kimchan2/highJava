@@ -6,8 +6,9 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Scanner;
 
+import org.apache.log4j.Logger;
+
 import kr.or.ddit.util.DBUtil;
-import kr.or.ddit.util.DBUtil2;
 import kr.or.ddit.util.DBUtil3;
 
 /*
@@ -38,33 +39,37 @@ create table mymember(
 
 */
 public class T05_MemberInfoTest {
+	// Log4j를 이용한 로그를 남기기 위해 로거 생성
+	private static final Logger sqlLogger = Logger.getLogger("log4jexam.sql.Query");
+	private static final Logger paramLogger = Logger.getLogger("log4jexam.sql.Parameter");
+	private static final Logger resultLogger = Logger.getLogger(T05_MemberInfoTest.class);
    
-   private Connection conn;
-   private Statement stmt;
-   private PreparedStatement pstmt;
-   private ResultSet rs;
-   
-   private Scanner scan = new Scanner(System.in); 
-   
-   /**
-    * 메뉴를 출력하는 메서드
-    */
-   public void displayMenu(){
-      System.out.println();
-      System.out.println("----------------------");
-      System.out.println("  === 작 업 선 택 ===");
-      System.out.println("  1. 자료 입력");
-      System.out.println("  2. 자료 삭제");
-      System.out.println("  3. 자료 수정");
-      System.out.println("  4. 전체 자료 출력");
-      System.out.println("  5. 작업 끝.");
-      System.out.println("----------------------");
-      System.out.print("원하는 작업 선택 >> ");
-   }
-   
-   /**
-    * 프로그램 시작메서드
-    */
+	private Connection conn;
+	private Statement stmt;
+	private PreparedStatement pstmt;
+	private ResultSet rs;
+
+	private Scanner scan = new Scanner(System.in);
+
+	/**
+	 * 메뉴를 출력하는 메서드
+	 */
+	public void displayMenu() {
+		System.out.println();
+		System.out.println("----------------------");
+		System.out.println("  === 작 업 선 택 ===");
+		System.out.println("  1. 자료 입력");
+		System.out.println("  2. 자료 삭제");
+		System.out.println("  3. 자료 수정");
+		System.out.println("  4. 전체 자료 출력");
+		System.out.println("  5. 작업 끝.");
+		System.out.println("----------------------");
+		System.out.print("원하는 작업 선택 >> ");
+	}
+
+	/**
+	 * 프로그램 시작메서드
+	 */
    public void start(){
       int choice;
       do{
@@ -257,6 +262,8 @@ public class T05_MemberInfoTest {
          String sql = "INSERT INTO MYMEMBER(mem_id, mem_name, mem_tel, mem_addr) "
                   + " VALUES (?, ?, ?, ?)";
          
+         sqlLogger.debug("쿼리: " + sql);
+         
          pstmt = conn.prepareStatement(sql);
          
          pstmt.setString(1, memId);
@@ -264,7 +271,11 @@ public class T05_MemberInfoTest {
          pstmt.setString(3, memTel);
          pstmt.setString(4, memAddr);
          
+         paramLogger.debug("파라미터: (" + memId + ", " + memName + ", " + memTel + ", " + memAddr + ")");
+         
          int cnt = pstmt.executeUpdate();
+         
+         resultLogger.fatal("결과: " + cnt);
          
          if(cnt > 0) {
             System.out.println(memId + "회원 추가 작업 성공");

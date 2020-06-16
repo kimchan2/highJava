@@ -4,7 +4,7 @@
 			"http://ibatis.apache.org/dtd/sql-map-2.dtd">
 
 <!-- namespace속성 : 아래에서 작성한 SQL을 호출할 때 같이 사용된다.-->
-<sqlMap namespace="memberTest">
+<sqlMap namespace="member">
 <!-- 
 	이 영역에 sql문에 맞는 태그를 사용하여 SQL문을 기술한다.
 	
@@ -60,6 +60,17 @@
 	SELECT * FROM mymember WHERE mem_id = #mem_id#
 	
 </select>
+
+<select id="getSearchMember">
+	
+	SELECT * FROM mymember
+	WHERE 1=1 AND mem_id = ?
+			  AND mem_name = ?
+			  AND mem_tel = ?
+			  AND mem_addr LIKE '%' || ? || '%'
+	
+</select>
+
 </sqlMap>
 
 

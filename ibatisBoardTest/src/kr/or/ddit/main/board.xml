@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap
+			PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+			"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<!-- namespace속성 : 아래에서 작성한 SQL을 호출할 때 같이 사용된다.-->
+<sqlMap namespace="boardTest">
+<!-- 
+	이 영역에 sql문에 맞는 태그를 사용하여 SQL문을 기술한다.
+	
+	사용할 수 있는 기본 태그들
+		<select> ~~~ </select>
+		<insert> ~~~ </insert>
+		<update> ~~~ </update>
+		<delete> ~~~ </delete>
+		
+	위 태그에서 사용되는 속성들
+		1) id속성 : 해당 태그를 호출할 때 <sqlMap>태그의 namespace와 연결하여 사용하는 이름
+		2) parameterClass속성 : sql문에 사용될 데이터가 들어있는 객체를 지정한다.
+							  (보통 VO클래스, 자바의 자료형이름 등이 사용된다.)
+		3) resultClass속성 : select문을 실행한 결과를 담을 객체를 지정한다.
+							(보통 VO클래스, 자바의 자료형이름 등이 사용된다.)
+ -->
+
+<!--  insert 연습  -->
+<insert id="insertBoard" parameterClass="boardVO">
+
+	INSERT INTO jdbc_board VALUES (board_seq.nextVal, #board_title#, #board_writer#, SYSDATE, #board_content#)
+	
+</insert>
+
+<!-- update 연습 -->
+<update id="updateBoard" parameterClass="boardVO">
+
+	UPDATE jdbc_board SET board_title = #board_title#, board_writer = #board_writer#,
+						  board_date = SYSDATE, board_content = #board_content#
+	WHERE board_no = #board_no#
+	
+</update>
+
+<!-- delete 연습 -->
+<!-- ##안에 아무거나 넣어줘도 상관없다 파라미터를 한개만 받기 때문 -->
+<update id="deleteBoard" parameterClass="int">
+
+	DELETE FROM jdbc_board WHERE board_no = #board_no#
+	
+</update>
+
+<!-- select 연습 -->
+<!-- 결과를 리턴할 타입의 클래스를 지정해줘야함 -->
+<select id="selectBoardList" parameterClass="boardVO" resultClass="boardVO">
+
+	SELECT * FROM jdbc_board WHERE 1=1
+      <isNotEqual compareValue="0" property="board_no">
+         AND board_no = #board_no#
+      </isNotEqual>
+      <isNotEmpty property="board_title">
+         AND board_title = #board_title#
+      </isNotEmpty>
+      <isNotEmpty property="board_writer">
+         AND board_writer = #board_writer#
+      </isNotEmpty>
+      <isNotEmpty property="board_date">
+      	AND board_date = #board_date#
+      </isNotEmpty>
+      <isNotEmpty property="board_content">
+         AND board_content LIKE '%' || #board_content# || '%'
+      </isNotEmpty>
+<!-- isNotNull일 경우 입력을 받는과정에서 개행문자가 들어가 NotNull조건을 만족해 쿼리가 붙지만 AND조건에 개행문자가 들어가므로 조회가안됨 -->
+	
+</select>
+
+<select id="selectAllBoardList" resultClass="boardVO">
+
+	SELECT * FROM jdbc_board ORDER BY board_no DESC
+	
+</select>
+
+<select id="getBoard" parameterClass="Integer">
+	
+	SELECT COUNT(*) as cnt FROM jdbc_board WHERE board_no = #board_no#
+	
+</select>
+
+</sqlMap>
+
+
+
+
