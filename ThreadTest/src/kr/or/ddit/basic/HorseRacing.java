@@ -22,51 +22,32 @@ public class HorseRacing {
 	
 	public static void main(String[] args) {
 		
-		HorseRacingThread hrt1 = new HorseRacingThread(new Horse("1번말"));
-		HorseRacingThread hrt2 = new HorseRacingThread(new Horse("2번말"));
-		HorseRacingThread hrt3 = new HorseRacingThread(new Horse("3번말"));
-		HorseRacingThread hrt4 = new HorseRacingThread(new Horse("4번말"));
-		HorseRacingThread hrt5 = new HorseRacingThread(new Horse("5번말"));
-		HorseRacingThread hrt6 = new HorseRacingThread(new Horse("6번말"));
-		HorseRacingThread hrt7 = new HorseRacingThread(new Horse("7번말"));
-		HorseRacingThread hrt8 = new HorseRacingThread(new Horse("8번말"));
-		HorseRacingThread hrt9 = new HorseRacingThread(new Horse("9번말"));
-		HorseRacingThread hrt10 = new HorseRacingThread(new Horse("10번말"));
+		HorseRacingThread[] hrts = new HorseRacingThread[] {
+				new HorseRacingThread(new Horse("1번말")),
+				new HorseRacingThread(new Horse("2번말")), 
+				new HorseRacingThread(new Horse("3번말")), 
+				new HorseRacingThread(new Horse("4번말")), 
+				new HorseRacingThread(new Horse("5번말")), 
+				new HorseRacingThread(new Horse("6번말")), 
+				new HorseRacingThread(new Horse("7번말")), 
+				new HorseRacingThread(new Horse("8번말")), 
+				new HorseRacingThread(new Horse("9번말")), 
+				new HorseRacingThread(new Horse("10번말"))
+		};
 		
-		RankCheck rc1 = new RankCheck(hrt1);
-		RankCheck rc2 = new RankCheck(hrt2);
-		RankCheck rc3 = new RankCheck(hrt3);
-		RankCheck rc4 = new RankCheck(hrt4);
-		RankCheck rc5 = new RankCheck(hrt5);
-		RankCheck rc6 = new RankCheck(hrt6);
-		RankCheck rc7 = new RankCheck(hrt7);
-		RankCheck rc8 = new RankCheck(hrt8);
-		RankCheck rc9 = new RankCheck(hrt9);
-		RankCheck rc10 = new RankCheck(hrt10);
+		RankCheck[] rcs = new RankCheck[10]; 
+		int index = 0;
+		for(HorseRacingThread hrt : hrts) {
+			
+			hrt.start();
+			rcs[index] = new RankCheck(hrt);
+			index++;
+		}
 		
-		hrt1.start();
-		hrt2.start();
-		hrt3.start();
-		hrt4.start();
-		hrt5.start();
-		hrt6.start();
-		hrt7.start();
-		hrt8.start();
-		hrt9.start();
-		hrt10.start();
-		
-		rc1.start();
-		rc2.start();
-		rc3.start();
-		rc4.start();
-		rc5.start();
-		rc6.start();
-		rc7.start();
-		rc8.start();
-		rc9.start();
-		rc10.start();
+		for(RankCheck rc : rcs) {
+			rc.start();
+		}
 	}
-	
 }
 
 class RankCheck extends Thread{
@@ -125,13 +106,10 @@ class HorseRacingThread extends Thread{
 			}
 			
 			track[i] = ">";
-			System.out.println(toString(track));
+			System.out.println(name + "\t" + toString(track));
 		}
-		System.out.println("==========================================================================");
 		System.out.println();
-		System.out.println();
-		System.out.println();
-		System.out.println();
+		System.out.println(toString());
 	}
 	
 	public String toString(String[] track) {
@@ -141,6 +119,12 @@ class HorseRacingThread extends Thread{
 		}
 		return str;
 	}
+
+	@Override
+	public String toString() {
+		return "HorseRacingThread [name=" + name + ", rank=" + rank + "]";
+	}
+	
 }
 
 class Horse implements Comparable<Integer>{

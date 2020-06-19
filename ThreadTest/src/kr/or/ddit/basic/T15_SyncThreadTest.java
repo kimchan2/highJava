@@ -2,7 +2,13 @@ package kr.or.ddit.basic;
 
 public class T15_SyncThreadTest {
 	public static void main(String[] args) {
+		ShareObject sObj = new ShareObject();
 		
+		WorkThread th1 = new WorkThread("1번쓰레드", sObj);
+		WorkThread th2 = new WorkThread("2번쓰레드", sObj);
+		
+		th1.start();
+		th2.start();
 	}
 }
 
@@ -11,13 +17,14 @@ class ShareObject{
 	private int sum = 0;
 	
 	public void add() {
+		synchronized (this) {
 		for(int i = 0; i < 1000000000; i++) {} // 동기화처리 전까지의 시간벌기용
 		
-		int n = sum;
-		n += 10; // 10 증가
-		sum = n;
-		
-		System.out.println(Thread.currentThread().getName() + "합계 : " + sum);
+			int n = sum;
+			n += 10; // 10 증가
+			sum = n;
+		}
+			System.out.println(Thread.currentThread().getName() + "합계 : " + sum);
 	}
 	
 	public int getSum() {
@@ -40,8 +47,6 @@ class WorkThread extends Thread{
 			sObj.add();
 		}
 	}
-	
-	
 }
 
 
