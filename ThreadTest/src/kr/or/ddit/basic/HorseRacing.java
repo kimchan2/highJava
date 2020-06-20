@@ -1,5 +1,9 @@
 package kr.or.ddit.basic;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 /*10마리의 말들이 경주하는 경마 프로그램 작성하기
 
 말은 Horse라는 이름의 클래스로 구성하고,
@@ -22,18 +26,26 @@ public class HorseRacing {
 	
 	public static void main(String[] args) {
 		
-		HorseRacingThread[] hrts = new HorseRacingThread[] {
-				new HorseRacingThread(new Horse("1번말")),
-				new HorseRacingThread(new Horse("2번말")), 
-				new HorseRacingThread(new Horse("3번말")), 
-				new HorseRacingThread(new Horse("4번말")), 
-				new HorseRacingThread(new Horse("5번말")), 
-				new HorseRacingThread(new Horse("6번말")), 
-				new HorseRacingThread(new Horse("7번말")), 
-				new HorseRacingThread(new Horse("8번말")), 
-				new HorseRacingThread(new Horse("9번말")), 
-				new HorseRacingThread(new Horse("10번말"))
+		List<Horse> horses = new ArrayList<>();
+		for(int i = 1; i <= 10; i++) {
+			horses.add(new Horse(i+"번말"));
+		}
+/*		Horse[] horses = new Horse[] {
+				new Horse("1번말"), new Horse("2번말"), new Horse("3번말"), new Horse("4번말"), new Horse("5번말"),
+				new Horse("6번말"), new Horse("7번말"), new Horse("8번말"), new Horse("9번말"), new Horse("10번말")
 		};
+*/		
+		List<HorseRacingThread> hrts = new ArrayList<HorseRacingThread>();
+		for(int i = 0; i < horses.size(); i++) {
+			hrts.add(new HorseRacingThread(horses.get(i)));
+		}
+		
+		/*
+		HorseRacingThread[] hrts = new HorseRacingThread[10];
+		for(int i = 0; i < horses.length; i++) {
+			hrts[i] = new HorseRacingThread(horses[i]);
+		}
+		*/
 		
 		RankCheck[] rcs = new RankCheck[10]; 
 		int index = 0;
@@ -47,6 +59,9 @@ public class HorseRacing {
 		for(RankCheck rc : rcs) {
 			rc.start();
 		}
+		
+		Collections.sort(horses);
+		System.out.println( horses.toString());
 	}
 }
 
@@ -127,7 +142,7 @@ class HorseRacingThread extends Thread{
 	
 }
 
-class Horse implements Comparable<Integer>{
+class Horse implements Comparable<Horse>{
 	
 	private String name;
 	private Integer rank;
@@ -145,7 +160,7 @@ class Horse implements Comparable<Integer>{
 		this.name = name;
 	}
 
-	public int getRank() {
+	public Integer getRank() {
 		return rank;
 	}
 
@@ -159,8 +174,8 @@ class Horse implements Comparable<Integer>{
 	}
 
 	@Override
-	public int compareTo(Integer rank) {
-		return new Integer(this.getRank()).compareTo(rank);
+	public int compareTo(Horse horse) {
+		return this.getRank().compareTo(horse.getRank());
 	}
 }
 
