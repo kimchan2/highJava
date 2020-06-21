@@ -24,6 +24,8 @@ import java.util.List;
 
 public class HorseRacing {
 	
+	//static RankThread rt = RankThread.getInstance();
+	
 	public static void main(String[] args) {
 		
 		List<Horse> horses = new ArrayList<>();
@@ -46,59 +48,47 @@ public class HorseRacing {
 			hrts[i] = new HorseRacingThread(horses[i]);
 		}
 		*/
-		
-		RankCheck[] rcs = new RankCheck[10]; 
-		int index = 0;
+
 		for(HorseRacingThread hrt : hrts) {
 			
 			hrt.start();
-			rcs[index] = new RankCheck(hrt);
-			index++;
+			
 		}
 		
-		for(RankCheck rc : rcs) {
-			rc.start();
+		for(HorseRacingThread hrt : hrts) {
+			
+			try {
+				hrt.join();
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
 		}
 		
-		Collections.sort(horses);
-		System.out.println( horses.toString());
+		Collections.sort(horses); // horses를 등수순으로 정렬
+		for(Horse hr : horses) {
+			System.out.println("Main 실행 : " + hr.getName() + " => " + hr.getRank() + "등");
+		}
 	}
 }
 
-class RankCheck extends Thread{
-	private HorseRacingThread targetThread;
-	private static Integer rank = 1;
-
-	public RankCheck(HorseRacingThread targetThread) {
-		this.targetThread = targetThread;
-	}
-	
-	@Override
-	public void run() {
-		HorseRacingThread.State state = targetThread.getState();
-		if( state == HorseRacingThread.State.TERMINATED ) {
-			targetThread.setRank(rank);
-			System.out.println( rank );
-			rank++;
-		}
-	}
-	
-	
-}
 
 class HorseRacingThread extends Thread{
 	private String name;
-	private Integer rank;
-	
-	
+	private static Integer rank = 0;
+	private Horse hor;
 	
 	public void setRank(Integer rank) {
 		this.rank = rank;
 	}
-
+	public Integer getRank() {
+		return this.rank;
+	}
 	public HorseRacingThread(Horse hor) {
 		super();
 		this.name = hor.getName();
+		this.hor = hor;
 	}
 
 	@Override
@@ -121,10 +111,13 @@ class HorseRacingThread extends Thread{
 			}
 			
 			track[i] = ">";
-			System.out.println(name + "\t" + toString(track));
+			System.out.println("Thread 실행 : " + name + "\t" + toString(track));
 		}
+		this.rank++;
+		hor.setRank(this.rank);
 		System.out.println();
-		System.out.println(toString());
+		System.out.println("Thread 실행 : 골인\t" + toString());
+		
 	}
 	
 	public String toString(String[] track) {
@@ -178,7 +171,6 @@ class Horse implements Comparable<Horse>{
 		return this.getRank().compareTo(horse.getRank());
 	}
 }
-
 
 
 
