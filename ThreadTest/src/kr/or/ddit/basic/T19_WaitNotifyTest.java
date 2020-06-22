@@ -1,6 +1,6 @@
 package kr.or.ddit.basic;
 /*
- * wait()메서드 => 동기화 영역에서 락을 풀고 Wait-Set영역(공유객체별 존재)으로 이동시킨다.
+ * wait()메서드 => 동기화 영역에서 사용해야 의미있음, 락을 풀고 Wait-Set영역(공유객체별 존재)으로 이동시킨다.
  * 
  * notify() 또는 notifyAll()메서드 => Wait-Set영역에 있는 쓰레드를 깨워서
  * 실행될 수 있도록 한다.(notify()는 하나, notifyAll()은 Wait-Set에 있는 전부 깨운다)
