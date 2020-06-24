@@ -17,7 +17,6 @@ public class T03_ByteArrayIOTest {
 		ByteArrayOutputStream output = new ByteArrayOutputStream();
 		
 		int data; // 읽어온 자료를 저장할 변수
-		
 		// read()메서드 => byte단위로 자료를 읽어와 int형태로 반환한다.
 		//				  더이상 읽어올 자료가 없으면 -1을 반환한다.
 		while( (data = input.read()) != -1 ) {
