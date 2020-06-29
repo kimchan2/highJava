@@ -1,5 +1,7 @@
 package kr.or.ddit.basic;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -19,13 +21,19 @@ public class FileCopy {
 		try {
 			fis = new FileInputStream("E:\\D_Other\\Tulips.jpg");
 			fos = new FileOutputStream("E:\\D_Other\\Tulips_Copy.jpg");
+			BufferedInputStream bis = new BufferedInputStream(fis);
+			BufferedOutputStream bos = new BufferedOutputStream(fos);
 			int c;
-			while( (c = fis.read()) != -1) {
-				fos.write(c);
+			while( (c = bis.read()) != -1) {
+				bos.write(c);
 			}
+			bis.close();
+			bos.close();
 			
 			fis.close();
 			fos.close();
+			
+			System.out.println("파일 복사 완료");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

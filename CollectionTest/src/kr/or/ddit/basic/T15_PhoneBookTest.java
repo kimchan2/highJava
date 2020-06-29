@@ -1,4 +1,14 @@
 package kr.or.ddit.basic;
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -64,13 +74,11 @@ import java.util.Set;
   
 */
 public class T15_PhoneBookTest {
-	private Scanner scan;
-	private Map<String, Phone> phonebookMap;
-	
+	private static Scanner scan;
+	private static Map<String, Phone> phonebookMap = new HashMap<>();
 	
 	public T15_PhoneBookTest() {
 		scan = new Scanner(System.in);
-		phonebookMap = new HashMap<>();
 	}
 	
 	// 메뉴를 출력하는 메서드
@@ -231,12 +239,39 @@ public class T15_PhoneBookTest {
 		System.out.println(name + "씨 등록 완료...");
 	}
 	
+	public static void main(String[] args) throws IOException, ClassNotFoundException {
+		
+		try {
+			//FileInputStream fis = new FileInputStream("E:\\A_TeachingMaterial\\3.HighJava\\workspace\\CollectionTest\\src\\kr\\or\\ddit\\basic\\phoneBook.bin");
+			FileInputStream fis = new FileInputStream("./phoneBook.bin");
+			ObjectInputStream ois = new ObjectInputStream(new BufferedInputStream(fis));
+			
+			Object obj = null;
+			while( (obj = ois.readObject()) != null) {
+				Phone phone = (Phone)obj;
+				phonebookMap.put(phone.getName(), phone);
+			}	
+			ois.close();
+			System.out.println("읽기 작업 완료");
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		new T15_PhoneBookTest().phoneBookStart(); // 프로그램 실행
+		
+		try {
+			//FileOutputStream fos = new FileOutputStream("E:\\A_TeachingMaterial\\3.HighJava\\workspace\\CollectionTest\\src\\kr\\\\or\\ddit\\basic\\phoneBook.bin");
+			FileOutputStream fos = new FileOutputStream("./phoneBook.bin");
+			ObjectOutputStream oos = new ObjectOutputStream(new BufferedOutputStream(fos));
 	
-	
-	
-
-	public static void main(String[] args) {
-		new T15_PhoneBookTest().phoneBookStart();
+			for(String name : phonebookMap.keySet()) {
+				oos.writeObject(phonebookMap.get(name));
+			}
+			oos.close();
+			System.out.println("쓰기 작업 종료");
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 }
@@ -245,7 +280,7 @@ public class T15_PhoneBookTest {
  * 전화번호 정보를 저장할 수 있는 VO 클래스
  * 
  */
-class Phone{
+class Phone implements Serializable{
 	private String name;	// 이름
 	private String tel;		// 전화번호
 	private String addr;	// 주소
@@ -279,7 +314,5 @@ class Phone{
 	public void setAddr(String addr) {
 		this.addr = addr;
 	}
-	
-	
 }
 

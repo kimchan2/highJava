@@ -2,11 +2,12 @@ package kr.or.ddit.basic;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
 
 public class T01_FileTest {
 	public static void main(String[] args) throws IOException {
 		// File객체 만들기 연습
-		
+
 		// 1. new File(String 파일 또는 경로명)
 		// => 디렉토리와 디렉토리 사이 또는 디렉토리와 파일명 사이의
 		// 	    구분 문자는 '\'를 사용하거나 '/'를 사용할 수 있다.
