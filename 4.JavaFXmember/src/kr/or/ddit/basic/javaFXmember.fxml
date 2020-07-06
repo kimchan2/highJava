@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane fx:controller="kr.or.ddit.basic.Controller" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <TextField fx:id="id" layoutX="153.0" layoutY="14.0" prefHeight="25.0" prefWidth="318.0" />
+      <TextField fx:id="name" layoutX="153.0" layoutY="50.0" prefHeight="25.0" prefWidth="318.0" />
+      <TextField fx:id="tel" layoutX="153.0" layoutY="86.0" prefHeight="25.0" prefWidth="318.0" />
+      <TextField fx:id="addr" layoutX="153.0" layoutY="121.0" prefHeight="25.0" prefWidth="318.0" />
+      <Text layoutX="86.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="회원ID :" wrappingWidth="48.12109375" />
+      <Text layoutX="86.0" layoutY="67.0" strokeType="OUTSIDE" strokeWidth="0.0" text="회원이름 :" wrappingWidth="56.12109375" />
+      <Text layoutX="86.0" layoutY="102.0" strokeType="OUTSIDE" strokeWidth="0.0" text="회원전화 :" wrappingWidth="56.12109375" />
+      <Text layoutX="86.0" layoutY="138.0" strokeType="OUTSIDE" strokeWidth="0.0" text="회원주소 :" wrappingWidth="56.12109375" />
+      <Button fx:id="addBtn" layoutX="79.0" layoutY="164.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="64.0" text="추가" />
+      <Button fx:id="crtBtn" layoutX="171.0" layoutY="164.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="64.0" text="수정" />
+      <Button fx:id="delBtn" layoutX="268.0" layoutY="164.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="64.0" text="삭제" />
+      <Button fx:id="conBtn" layoutX="361.0" layoutY="164.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="64.0" text="확인" />
+      <Button fx:id="cnBtn" layoutX="448.0" layoutY="164.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="64.0" text="취소" />
+      <TableView fx:id="tableView" layoutY="200.0" prefHeight="200.0" prefWidth="600.0">
+        <columns>
+          <TableColumn fx:id="idCol" prefWidth="118.0" text="회원ID" />
+          <TableColumn fx:id="nameCol" prefWidth="112.0" text="회원이름" />
+            <TableColumn fx:id="telCol" prefWidth="135.0" text="회원전화" />
+            <TableColumn fx:id="addrCol" prefWidth="234.0" text="회원주소" />
+        </columns>
+      </TableView>
+   </children>
+</AnchorPane>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane fx:controller="kr.or.ddit.basic.Controller" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="462.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label layoutX="24.0" layoutY="23.0" text="이 름 :">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="24.0" layoutY="60.0" text="성 별 :">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="24.0" layoutY="96.0" text="취 미 :">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtName" layoutX="93.0" layoutY="24.0" />
+      <RadioButton fx:id="rbtMale" layoutX="107.0" layoutY="65.0" mnemonicParsing="false" text="남" >
+         <toggleGroup>
+            <ToggleGroup fx:id="grouprbt" />
+         </toggleGroup>
+      </RadioButton>
+      <RadioButton fx:id="rbtFemale" layoutX="162.0" layoutY="65.0" mnemonicParsing="false" text="여" toggleGroup="$grouprbt" />
+      <CheckBox fx:id="chktravel" layoutX="101.0" layoutY="100.0" mnemonicParsing="false" text="여행" />
+      <CheckBox fx:id="chkhiking" layoutX="156.0" layoutY="100.0" mnemonicParsing="false" text="등산" />
+      <CheckBox fx:id="chkReadBook" layoutX="209.0" layoutY="100.0" mnemonicParsing="false" text="독서" />
+      <CheckBox fx:id="chkBaduk" layoutX="262.0" layoutY="100.0" mnemonicParsing="false" text="바둑" />
+      <CheckBox fx:id="chkJanggi" layoutX="317.0" layoutY="100.0" mnemonicParsing="false" text="장기" />
+      <CheckBox fx:id="chkGame" layoutX="370.0" layoutY="100.0" mnemonicParsing="false" text="게임" />
+      <CheckBox fx:id="chkTennis" layoutX="427.0" layoutY="100.0" mnemonicParsing="false" text="테니스" />
+      <CheckBox fx:id="chkBadminton" layoutX="493.0" layoutY="100.0" mnemonicParsing="false" text="배드민턴" />
+      <Button fx:id="btnShow" layoutX="24.0" layoutY="132.0" mnemonicParsing="false" onMouseClicked="#btnShowClicked" prefHeight="23.0" prefWidth="57.0" text="보기" />
+      <TextArea fx:id="txtArea" layoutX="14.0" layoutY="165.0" prefHeight="290.0" prefWidth="305.0" />
+   </children>
+</AnchorPane>

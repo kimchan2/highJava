@@ -3,23 +3,16 @@ package kr.or.ddit.basic;
 
 
 import javafx.application.Application;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.geometry.Insets;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TextArea;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
 public class T11_ComboGugudanMain extends Application{
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
+		/*
 		BorderPane root = new BorderPane();
 		root.setPrefSize(300, 300);
 		
@@ -41,14 +34,14 @@ public class T11_ComboGugudanMain extends Application{
 				
 		cmbDan.setItems(list);
 		
-		/*btnDan.setOnAction(new EventHandler<ActionEvent>() {
+		btnDan.setOnAction(new EventHandler<ActionEvent>() {
 			
 			@Override
 			public void handle(ActionEvent event) {
 				// TODO Auto-generated method stub
 				
 			}
-		});*/
+		});
 		btnDan.setOnAction(e->{
 			int dan = cmbDan.getSelectionModel().getSelectedItem();
 			
@@ -63,6 +56,13 @@ public class T11_ComboGugudanMain extends Application{
 		
 		root.setTop(hbox);
 		root.setCenter(txtResult);
+		*/
+		
+		// Parent root = FXMLLoader.load(getClass().getResource("ComboGugudan.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("ComboGugudan.fxml"));
+		Parent root = loader.load();
+//		ComboGugudanController controller = loader.getController();
+//		controller.onBtnClicked(event);
 		
 		Scene scene = new Scene(root);
 		primaryStage.setTitle("콤보박스 구구단");

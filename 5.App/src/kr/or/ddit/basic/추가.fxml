@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="204.0" prefWidth="241.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Text layoutX="35.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" text="이름" />
+      <Text layoutX="35.0" layoutY="72.0" strokeType="OUTSIDE" strokeWidth="0.0" text="국어" />
+      <Text layoutX="35.0" layoutY="106.0" strokeType="OUTSIDE" strokeWidth="0.0" text="수학" wrappingWidth="24.0" />
+      <Text layoutX="35.0" layoutY="141.0" strokeType="OUTSIDE" strokeWidth="0.0" text="영어" />
+      <TextField fx:id="nameT" layoutX="69.0" layoutY="22.0" />
+      <TextField fx:id="korT" layoutX="69.0" layoutY="57.0" />
+      <TextField fx:id="mathT" layoutX="69.0" layoutY="90.0" />
+      <TextField fx:id="engT" layoutX="69.0" layoutY="125.0" />
+      <Button fx:id="saveBtn" layoutX="59.0" layoutY="167.0" mnemonicParsing="false" text="저장" />
+      <Button fx:id="cancelBtn" layoutX="138.0" layoutY="167.0" mnemonicParsing="false" text="취소" />
+   </children>
+</AnchorPane>
