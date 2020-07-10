@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.BorderPane?>
+
+<BorderPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="kr.or.ddit.rmi.ChatController">
+   <top>
+      <Pane prefHeight="50.0" prefWidth="400.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label layoutX="14.0" layoutY="15.0" text="채팅 클라이언트" />
+         </children>
+      </Pane>
+   </top>
+   <center>
+      <Pane prefHeight="400.0" prefWidth="400.0" BorderPane.alignment="CENTER">
+         <children>
+            <TextArea fx:id="taChatList" prefHeight="400.0" prefWidth="277.0" />
+            <ListView fx:id="lvUserList" layoutX="281.0" prefHeight="400.0" prefWidth="119.0">
+               <contextMenu>
+                  <ContextMenu>
+                    <items>
+                        <MenuItem fx:id="miReqChat" mnemonicParsing="false" onAction="#requestPrivateChat" text="1:1 대화신청" />
+                        <MenuItem fx:id="miSendFile" mnemonicParsing="false" onAction="#sendFile" text="파일전송" />
+                    </items>
+                  </ContextMenu>
+               </contextMenu></ListView>
+         </children>
+      </Pane>
+   </center>
+   <bottom>
+      <HBox BorderPane.alignment="CENTER">
+         <children>
+            <TextField fx:id="tfChat" prefHeight="30.0" prefWidth="284.0" />
+            <Button mnemonicParsing="false" onAction="#sendMessage" prefHeight="29.0" prefWidth="58.0" text="전송" />
+            <Button mnemonicParsing="false" onAction="#disconnect" prefHeight="29.0" prefWidth="58.0" text="종료" />
+         </children>
+      </HBox>
+   </bottom>
+</BorderPane>

@@ -52,7 +52,7 @@ public class ChatServerRunnable implements Runnable{
 				boolean isExist = clientList.contains(address.getHostName());
 			
 				if(!isExist){ // 목록에 존재하지 않는 사용자라면..
-					Platform.runLater(new Runnable() {
+					Platform.runLater(new Runnable() { // javafx 에게 처리를 맡겨야함
 						
 						@Override
 						public void run() {
